@@ -145,12 +145,18 @@
                                                         <color key="backgroundColor" systemColor="systemGreenColor"/>
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="plain" title="Calculate"/>
+                                                        <connections>
+                                                            <action selector="calculateButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Vxn-AL-Fmq"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iTY-uE-UOR">
                                                         <rect key="frame" x="188.66666666666663" y="0.0" width="172.33333333333337" height="70"/>
                                                         <color key="backgroundColor" systemColor="systemRedColor"/>
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="plain" title="Clear"/>
+                                                        <connections>
+                                                            <action selector="clearButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="McU-Kj-aBE"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -193,6 +199,15 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="rCG-4V-hMM" secondAttribute="bottom" id="dFa-nQ-WXE"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="activityTextField" destination="cNV-JF-Y0N" id="Xeh-Yt-NZn"/>
+                        <outlet property="ageTextField" destination="uAV-lv-gnq" id="73Y-0I-n0y"/>
+                        <outlet property="calculateButton" destination="Lfe-r9-he5" id="2rx-96-y4z"/>
+                        <outlet property="clearButton" destination="iTY-uE-UOR" id="M1e-gA-Np9"/>
+                        <outlet property="heightTextField" destination="cZi-Ff-g4O" id="plC-MD-GZc"/>
+                        <outlet property="segmentControl" destination="bzP-5g-O2e" id="Ddc-fm-6Z1"/>
+                        <outlet property="weightTextField" destination="OXw-gm-Ofd" id="yDc-UF-vrT"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
