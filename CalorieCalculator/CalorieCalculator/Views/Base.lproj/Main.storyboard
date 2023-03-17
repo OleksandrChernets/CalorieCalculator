@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="4Tx-7K-VUS">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
@@ -8,6 +8,22 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="eA9-yZ-Y4e">
+            <objects>
+                <navigationController id="4Tx-7K-VUS" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="59I-Su-LJ7">
+                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="sqC-PP-oHB"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="blt-7s-Z8g" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-785" y="4"/>
+        </scene>
         <!--Home View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
@@ -17,10 +33,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rCG-4V-hMM">
-                                <rect key="frame" x="0.0" y="59" width="393" height="759"/>
+                                <rect key="frame" x="0.0" y="103" width="393" height="715"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WbK-Rr-P1R">
-                                        <rect key="frame" x="16" y="40" width="361" height="719"/>
+                                        <rect key="frame" x="16" y="40" width="361" height="675"/>
                                         <subviews>
                                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="bzP-5g-O2e">
                                                 <rect key="frame" x="0.0" y="0.0" width="361" height="32"/>
@@ -28,6 +44,9 @@
                                                     <segment title="First"/>
                                                     <segment title="Second"/>
                                                 </segments>
+                                                <connections>
+                                                    <action selector="segmentValueChange:" destination="BYZ-38-t0r" eventType="valueChanged" id="t2c-Ou-rLp"/>
+                                                </connections>
                                             </segmentedControl>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="HGc-ZU-Sm5">
                                                 <rect key="frame" x="0.0" y="55" width="361" height="70"/>
@@ -181,7 +200,7 @@
                                         </constraints>
                                     </view>
                                 </subviews>
-                                <color key="backgroundColor" systemColor="systemGray4Color"/>
+                                <color key="backgroundColor" red="0.77647060160000003" green="0.77647060160000003" blue="0.78431367870000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstItem="WbK-Rr-P1R" firstAttribute="leading" secondItem="rCG-4V-hMM" secondAttribute="leading" constant="16" id="0UO-Fx-3UF"/>
                                     <constraint firstAttribute="bottom" secondItem="WbK-Rr-P1R" secondAttribute="bottom" id="ZY1-4f-hOR"/>
@@ -199,27 +218,59 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="rCG-4V-hMM" secondAttribute="bottom" id="dFa-nQ-WXE"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="InK-xO-7ja"/>
                     <connections>
                         <outlet property="activityTextField" destination="cNV-JF-Y0N" id="Xeh-Yt-NZn"/>
                         <outlet property="ageTextField" destination="uAV-lv-gnq" id="73Y-0I-n0y"/>
                         <outlet property="calculateButton" destination="Lfe-r9-he5" id="2rx-96-y4z"/>
                         <outlet property="clearButton" destination="iTY-uE-UOR" id="M1e-gA-Np9"/>
                         <outlet property="heightTextField" destination="cZi-Ff-g4O" id="plC-MD-GZc"/>
-                        <outlet property="segmentControl" destination="bzP-5g-O2e" id="Ddc-fm-6Z1"/>
+                        <outlet property="segmentControl" destination="bzP-5g-O2e" id="Gby-am-I70"/>
                         <outlet property="weightTextField" destination="OXw-gm-Ofd" id="yDc-UF-vrT"/>
+                        <segue destination="O4T-oI-65I" kind="show" identifier="segue" id="tbn-n6-hRa"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="6.8702290076335872" y="3.5211267605633805"/>
         </scene>
+        <!--Activity List View Controller-->
+        <scene sceneID="f4B-w6-aSP">
+            <objects>
+                <viewController id="O4T-oI-65I" customClass="ActivityListViewController" customModule="CalorieCalculator" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="HFY-FM-Q0o">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4C3-Kz-3Wh">
+                                <rect key="frame" x="0.0" y="103" width="393" height="715"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="m6e-ov-SJX"/>
+                        <color key="backgroundColor" red="0.77647060160000003" green="0.77647060160000003" blue="0.78431367870000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <constraints>
+                            <constraint firstItem="m6e-ov-SJX" firstAttribute="bottom" secondItem="4C3-Kz-3Wh" secondAttribute="bottom" id="1qU-HB-LEz"/>
+                            <constraint firstItem="4C3-Kz-3Wh" firstAttribute="leading" secondItem="m6e-ov-SJX" secondAttribute="leading" id="MKq-MC-E0I"/>
+                            <constraint firstItem="4C3-Kz-3Wh" firstAttribute="top" secondItem="m6e-ov-SJX" secondAttribute="top" id="uMC-Zp-GWp"/>
+                            <constraint firstItem="m6e-ov-SJX" firstAttribute="trailing" secondItem="4C3-Kz-3Wh" secondAttribute="trailing" id="ujS-th-rqT"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="rOR-9C-4EO"/>
+                    <connections>
+                        <outlet property="detailLabel" destination="4C3-Kz-3Wh" id="fjO-H3-KCs"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="94a-gt-WE3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="714" y="4"/>
+        </scene>
     </scenes>
     <resources>
         <systemColor name="opaqueSeparatorColor">
             <color red="0.77647058823529413" green="0.77647058823529413" blue="0.78431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemGray4Color">
-            <color red="0.81960784313725488" green="0.81960784313725488" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGreenColor">
             <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

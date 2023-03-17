@@ -13,6 +13,9 @@
 		5EDA9D5C29C470B000DF6575 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5EDA9D5A29C470B000DF6575 /* Main.storyboard */; };
 		5EDA9D5E29C470B100DF6575 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5EDA9D5D29C470B100DF6575 /* Assets.xcassets */; };
 		5EDA9D6129C470B100DF6575 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5EDA9D5F29C470B100DF6575 /* LaunchScreen.storyboard */; };
+		5EDA9D6A29C4CAA900DF6575 /* TypeModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EDA9D6929C4CAA900DF6575 /* TypeModels.swift */; };
+		5EDA9D7229C4CD4B00DF6575 /* ActivityListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EDA9D7129C4CD4B00DF6575 /* ActivityListViewController.swift */; };
+		5EDA9D7429C4D47300DF6575 /* GenderModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EDA9D7329C4D47300DF6575 /* GenderModels.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +27,9 @@
 		5EDA9D5D29C470B100DF6575 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5EDA9D6029C470B100DF6575 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5EDA9D6229C470B100DF6575 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5EDA9D6929C4CAA900DF6575 /* TypeModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeModels.swift; sourceTree = "<group>"; };
+		5EDA9D7129C4CD4B00DF6575 /* ActivityListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityListViewController.swift; sourceTree = "<group>"; };
+		5EDA9D7329C4D47300DF6575 /* GenderModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderModels.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,15 +62,58 @@
 		5EDA9D5329C470B000DF6575 /* CalorieCalculator */ = {
 			isa = PBXGroup;
 			children = (
+				5EDA9D6B29C4CAB400DF6575 /* Application */,
+				5EDA9D6829C4CA9100DF6575 /* Models */,
+				5EDA9D6C29C4CAC200DF6575 /* Controllers */,
+				5EDA9D6D29C4CBBA00DF6575 /* Views */,
+				5EDA9D6E29C4CBC600DF6575 /* DefaultFiles */,
+			);
+			path = CalorieCalculator;
+			sourceTree = "<group>";
+		};
+		5EDA9D6829C4CA9100DF6575 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				5EDA9D6929C4CAA900DF6575 /* TypeModels.swift */,
+				5EDA9D7329C4D47300DF6575 /* GenderModels.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		5EDA9D6B29C4CAB400DF6575 /* Application */ = {
+			isa = PBXGroup;
+			children = (
 				5EDA9D5429C470B000DF6575 /* AppDelegate.swift */,
 				5EDA9D5629C470B000DF6575 /* SceneDelegate.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		5EDA9D6C29C4CAC200DF6575 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
 				5EDA9D5829C470B000DF6575 /* HomeViewController.swift */,
+				5EDA9D7129C4CD4B00DF6575 /* ActivityListViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		5EDA9D6D29C4CBBA00DF6575 /* Views */ = {
+			isa = PBXGroup;
+			children = (
 				5EDA9D5A29C470B000DF6575 /* Main.storyboard */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		5EDA9D6E29C4CBC600DF6575 /* DefaultFiles */ = {
+			isa = PBXGroup;
+			children = (
 				5EDA9D5D29C470B100DF6575 /* Assets.xcassets */,
 				5EDA9D5F29C470B100DF6575 /* LaunchScreen.storyboard */,
 				5EDA9D6229C470B100DF6575 /* Info.plist */,
 			);
-			path = CalorieCalculator;
+			path = DefaultFiles;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -138,9 +187,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5EDA9D7429C4D47300DF6575 /* GenderModels.swift in Sources */,
 				5EDA9D5929C470B000DF6575 /* HomeViewController.swift in Sources */,
+				5EDA9D6A29C4CAA900DF6575 /* TypeModels.swift in Sources */,
 				5EDA9D5529C470B000DF6575 /* AppDelegate.swift in Sources */,
 				5EDA9D5729C470B000DF6575 /* SceneDelegate.swift in Sources */,
+				5EDA9D7229C4CD4B00DF6575 /* ActivityListViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -288,7 +340,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = CalorieCalculator/Info.plist;
+				INFOPLIST_FILE = CalorieCalculator/DefaultFiles/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -315,7 +367,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = CalorieCalculator/Info.plist;
+				INFOPLIST_FILE = CalorieCalculator/DefaultFiles/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
