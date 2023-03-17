@@ -39,7 +39,7 @@ class HomeViewController: UIViewController {
    
     
     
-    // MARK: Lifecykl method
+    // MARK: Lifecycle method
     
     override func viewDidLoad() {
         super.viewDidLoad()
