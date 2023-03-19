@@ -36,7 +36,7 @@ class HomeViewController: UIViewController {
     private let activities = [Activity.none, Activity.low, Activity.medium, Activity.high]
     
     
-   
+    
     
     
     // MARK: Lifecycle method
@@ -66,12 +66,12 @@ class HomeViewController: UIViewController {
         guard let weight = Double(weightTextField.text ?? ""),
               let height = Double(heightTextField.text ?? ""),
               let age = Double(ageTextField.text ?? ""),
-        weight > 0 && height > 0 && age > 0 else { return }
+              weight > 0 && height > 0 && age > 0 else { return }
         
         let activityIndex = pickerView.selectedRow(inComponent: 0)
         let activity = activities[activityIndex]
         let activityValue = activity.value
-     
+        
         guard let selectedGender = Gender(rawValue: segmentControl.selectedSegmentIndex) else { return }
         switch selectedGender {
         case .male:
@@ -92,17 +92,17 @@ class HomeViewController: UIViewController {
     
     // MARK: Public methods
     
-   public func showAlert(with title: String) {
+    public func showAlert(with title: String) {
         let alert = UIAlertController(title: "Your result", message: title, preferredStyle: .alert)
         alert.addAction(.init(title: "Ok", style: .cancel))
         alert.addAction(.init(title: "Show detail", style: .default) { _ in
-           
+            
             self.performSegue(withIdentifier: "segue", sender: self)
         })
         self.present(alert, animated: true)
     }
     
-   public func clear() {
+    public func clear() {
         weightTextField.text = nil
         heightTextField.text = nil
         ageTextField.text =  nil
