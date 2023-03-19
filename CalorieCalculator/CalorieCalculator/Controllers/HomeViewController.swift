@@ -108,6 +108,9 @@ class HomeViewController: UIViewController {
         ageTextField.text =  nil
         activitySelectBy(row: 0)
         weightTextField.becomeFirstResponder()
+        pickerView.selectRow(0, inComponent: 0, animated: true)
+        activitySelectBy(row: 0)
+        
     }
     public func configureSegmentControl() {
         segmentControl.removeAllSegments()
