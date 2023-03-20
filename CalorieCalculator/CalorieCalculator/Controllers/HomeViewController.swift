@@ -12,6 +12,10 @@ class HomeViewController: UIViewController {
     
     // MARK: @IBOutlets
     
+    @IBOutlet weak var weightLabel: UILabel!
+    @IBOutlet weak var activityLabel: UILabel!
+    @IBOutlet weak var ageLabel: UILabel!
+    @IBOutlet weak var heightLabel: UILabel!
     @IBOutlet weak var weightTextField: UITextField!
     @IBOutlet weak var heightTextField: UITextField!
     @IBOutlet weak var ageTextField: UITextField!
@@ -47,7 +51,7 @@ class HomeViewController: UIViewController {
         configureSegmentControl()
         configureTextField()
         configureActivityField()
-        
+        localizeUI()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -93,9 +97,9 @@ class HomeViewController: UIViewController {
     // MARK: Public methods
     
     public func showAlert(with title: String) {
-        let alert = UIAlertController(title: "Your result", message: title, preferredStyle: .alert)
+        let alert = UIAlertController(title: R.string.localizable.alertResult(), message: title, preferredStyle: .alert)
         alert.addAction(.init(title: "Ok", style: .cancel))
-        alert.addAction(.init(title: "Show detail", style: .default) { _ in
+        alert.addAction(.init(title: R.string.localizable.alertShowDetail(), style: .default) { _ in
             
             self.performSegue(withIdentifier: "segue", sender: self)
         })
@@ -114,8 +118,8 @@ class HomeViewController: UIViewController {
     }
     public func configureSegmentControl() {
         segmentControl.removeAllSegments()
-        segmentControl.insertSegment(withTitle: Gender.male.title, at: 0, animated: false)
-        segmentControl.insertSegment(withTitle: Gender.female.title, at: 1, animated: false)
+        segmentControl.insertSegment(withTitle: R.string.localizable.genderMale(), at: 0, animated: false)
+        segmentControl.insertSegment(withTitle: R.string.localizable.genderFamele(), at: 1, animated: false)
         segmentControl.selectedSegmentIndex = 0
         segmentControl.layer.cornerRadius = 15
     }
@@ -139,6 +143,16 @@ class HomeViewController: UIViewController {
     
     public func activitySelectBy(row: Int) {
         activityTextField.text = activities[row].title
+    }
+    
+    public func localizeUI() {
+        weightLabel.text = R.string.localizable.calculatorWeightLabel()
+        heightLabel.text = R.string.localizable.calculatorHeightLabel()
+        ageLabel.text = R.string.localizable.calculatorAgeLabel()
+        activityLabel.text = R.string.localizable.calculatorActivityLabel()
+        calculateButton.setTitle(R.string.localizable.calculatorCalculateButton(), for: .normal)
+        clearButton.setTitle(R.string.localizable.calculatorClearButton(), for: .normal)
+        
     }
 }
 

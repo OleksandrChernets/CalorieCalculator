@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		5E7F723929C5072700D93F38 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 5E7F723829C5072700D93F38 /* Podfile */; };
+		5E7F723C29C85C7400D93F38 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7F723B29C85C7400D93F38 /* R.generated.swift */; };
+		5E7F724029C88BC800D93F38 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5E7F724229C88BC800D93F38 /* Localizable.strings */; };
 		5EDA9D5529C470B000DF6575 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EDA9D5429C470B000DF6575 /* AppDelegate.swift */; };
 		5EDA9D5729C470B000DF6575 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EDA9D5629C470B000DF6575 /* SceneDelegate.swift */; };
 		5EDA9D5929C470B000DF6575 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EDA9D5829C470B000DF6575 /* HomeViewController.swift */; };
@@ -23,6 +25,10 @@
 /* Begin PBXFileReference section */
 		1A76E7B3A78F6B381AAA5A88 /* Pods_CalorieCalculator.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CalorieCalculator.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E7F723829C5072700D93F38 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		5E7F723B29C85C7400D93F38 /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = SOURCE_ROOT; };
+		5E7F723D29C88A0300D93F38 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/Main.strings; sourceTree = "<group>"; };
+		5E7F724129C88BC800D93F38 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		5E7F724329C88BCF00D93F38 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/Localizable.strings; sourceTree = "<group>"; };
 		5EDA9D5129C470B000DF6575 /* CalorieCalculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CalorieCalculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5EDA9D5429C470B000DF6575 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5EDA9D5629C470B000DF6575 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -104,6 +110,8 @@
 			children = (
 				5EDA9D5429C470B000DF6575 /* AppDelegate.swift */,
 				5EDA9D5629C470B000DF6575 /* SceneDelegate.swift */,
+				5E7F723B29C85C7400D93F38 /* R.generated.swift */,
+				5E7F724229C88BC800D93F38 /* Localizable.strings */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -151,6 +159,7 @@
 			buildConfigurationList = 5EDA9D6529C470B100DF6575 /* Build configuration list for PBXNativeTarget "CalorieCalculator" */;
 			buildPhases = (
 				1B2FCABEB3ABAE4D576EEDC9 /* [CP] Check Pods Manifest.lock */,
+				5E7F723A29C85BEA00D93F38 /* ShellScript */,
 				5EDA9D4D29C470B000DF6575 /* Sources */,
 				5EDA9D4E29C470B000DF6575 /* Frameworks */,
 				5EDA9D4F29C470B000DF6575 /* Resources */,
@@ -187,6 +196,7 @@
 			knownRegions = (
 				en,
 				Base,
+				uk,
 			);
 			mainGroup = 5EDA9D4829C470B000DF6575;
 			productRefGroup = 5EDA9D5229C470B000DF6575 /* Products */;
@@ -203,6 +213,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5E7F724029C88BC800D93F38 /* Localizable.strings in Resources */,
 				5EDA9D6129C470B100DF6575 /* LaunchScreen.storyboard in Resources */,
 				5EDA9D5E29C470B100DF6575 /* Assets.xcassets in Resources */,
 				5E7F723929C5072700D93F38 /* Podfile in Resources */,
@@ -235,6 +246,25 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		5E7F723A29C85BEA00D93F38 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				$SRCROOT/R.generated.swift,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"$PODS_ROOT/R.swift/rswift\" generate \"$SRCROOT/R.generated.swift\"\n";
+		};
 		DEACD1CE31E442C7D9F6045F /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -260,6 +290,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5EDA9D7429C4D47300DF6575 /* GenderModels.swift in Sources */,
+				5E7F723C29C85C7400D93F38 /* R.generated.swift in Sources */,
 				5EDA9D5929C470B000DF6575 /* HomeViewController.swift in Sources */,
 				5EDA9D6A29C4CAA900DF6575 /* TypeModels.swift in Sources */,
 				5EDA9D5529C470B000DF6575 /* AppDelegate.swift in Sources */,
@@ -271,10 +302,20 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		5E7F724229C88BC800D93F38 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5E7F724129C88BC800D93F38 /* en */,
+				5E7F724329C88BCF00D93F38 /* uk */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		5EDA9D5A29C470B000DF6575 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				5EDA9D5B29C470B000DF6575 /* Base */,
+				5E7F723D29C88A0300D93F38 /* uk */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -294,6 +335,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -354,6 +396,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";

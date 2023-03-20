@@ -16,13 +16,13 @@ enum Activity {
     var title: String {
         switch self {
         case .none:
-           return "None"
+            return R.string.localizable.activityNone()
         case .low:
-            return "Low"
+            return R.string.localizable.activityLow()
         case .medium:
-            return "Medium"
+            return R.string.localizable.activityMedium()
         case .high:
-            return "High"
+            return R.string.localizable.activityHigh()
         }
     }
     var value: Double {

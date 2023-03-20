@@ -1,0 +1,15 @@
+"Calculator.calculateButton" = "Calculate";
+"Calculator.clearButton" = "Clear";
+"Calculator.weightLabel" = "Weight";
+"Calculator.heightLabel" = "Height";
+"Calculator.ageLabel" = "Age";
+"Calculator.activityLabel" = "Physical Activity";
+"Gender.male" = "Male";
+"Gender.famele" = "Female";
+"Activity.none" = "None";
+"Activity.low" = "Low";
+"Activity.medium" = "Medium";
+"Activity.high" = "High";
+"Alert.result" = "Your result";
+"Alert.showDetail" = "Show detail";
+

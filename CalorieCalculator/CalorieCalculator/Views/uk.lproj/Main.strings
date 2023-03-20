@@ -1,0 +1,33 @@
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "4C3-Kz-3Wh"; */
+"4C3-Kz-3Wh.text" = "Label";
+
+/* Class = "UILabel"; text = "Physical Activity"; ObjectID = "9jG-ws-mNc"; */
+"9jG-ws-mNc.text" = "Physical Activity";
+
+/* Class = "UIButton"; configuration.title = "Calculate"; ObjectID = "Lfe-r9-he5"; */
+"Lfe-r9-he5.configuration.title" = "Calculate";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "Lfe-r9-he5"; */
+"Lfe-r9-he5.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "Height"; ObjectID = "T09-qL-7gC"; */
+"T09-qL-7gC.text" = "Height";
+
+/* Class = "UILabel"; text = "Weight"; ObjectID = "ZZf-gy-clR"; */
+"ZZf-gy-clR.text" = "Weight";
+
+/* Class = "UISegmentedControl"; bzP-5g-O2e.segmentTitles[0] = "First"; ObjectID = "bzP-5g-O2e"; */
+"bzP-5g-O2e.segmentTitles[0]" = "First";
+
+/* Class = "UISegmentedControl"; bzP-5g-O2e.segmentTitles[1] = "Second"; ObjectID = "bzP-5g-O2e"; */
+"bzP-5g-O2e.segmentTitles[1]" = "Second";
+
+/* Class = "UILabel"; text = "Age"; ObjectID = "gor-ep-g8V"; */
+"gor-ep-g8V.text" = "Age";
+
+/* Class = "UIButton"; configuration.title = "Clear"; ObjectID = "iTY-uE-UOR"; */
+"iTY-uE-UOR.configuration.title" = "Clear";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "iTY-uE-UOR"; */
+"iTY-uE-UOR.normalTitle" = "Button";

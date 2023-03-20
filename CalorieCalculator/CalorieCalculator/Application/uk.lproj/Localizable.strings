@@ -1,0 +1,14 @@
+"Calculator.calculateButton" = "Розрахувати";
+"Calculator.clearButton" = "Почистити";
+"Calculator.weightLabel" = "Вага";
+"Calculator.heightLabel" = "Висота";
+"Calculator.ageLabel" = "Вік";
+"Calculator.activityLabel" = "Фізична Активність";
+"Gender.male" = "Чоловік";
+"Gender.famele" = "Жінка";
+"Activity.none" = "Нічого";
+"Activity.low" = "Маленька";
+"Activity.medium" = "Середня";
+"Activity.high" = "Висока";
+"Alert.result" = "Ваш результат";
+"Alert.showDetail" = "Подивитись деталі";

@@ -220,12 +220,16 @@
                     </view>
                     <navigationItem key="navigationItem" id="InK-xO-7ja"/>
                     <connections>
+                        <outlet property="activityLabel" destination="9jG-ws-mNc" id="KH1-dm-ppP"/>
                         <outlet property="activityTextField" destination="cNV-JF-Y0N" id="Xeh-Yt-NZn"/>
+                        <outlet property="ageLabel" destination="gor-ep-g8V" id="QUC-jf-Oj5"/>
                         <outlet property="ageTextField" destination="uAV-lv-gnq" id="73Y-0I-n0y"/>
-                        <outlet property="calculateButton" destination="Lfe-r9-he5" id="2rx-96-y4z"/>
-                        <outlet property="clearButton" destination="iTY-uE-UOR" id="M1e-gA-Np9"/>
+                        <outlet property="calculateButton" destination="Lfe-r9-he5" id="cCR-BM-IX1"/>
+                        <outlet property="clearButton" destination="iTY-uE-UOR" id="TtW-qZ-Jre"/>
+                        <outlet property="heightLabel" destination="T09-qL-7gC" id="8Q4-zQ-e5f"/>
                         <outlet property="heightTextField" destination="cZi-Ff-g4O" id="plC-MD-GZc"/>
                         <outlet property="segmentControl" destination="bzP-5g-O2e" id="Gby-am-I70"/>
+                        <outlet property="weightLabel" destination="ZZf-gy-clR" id="0I3-b0-hK2"/>
                         <outlet property="weightTextField" destination="OXw-gm-Ofd" id="yDc-UF-vrT"/>
                         <segue destination="O4T-oI-65I" kind="show" identifier="segue" id="tbn-n6-hRa"/>
                     </connections>
