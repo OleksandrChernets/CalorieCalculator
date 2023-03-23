@@ -9,7 +9,6 @@ import UIKit
 
 class HomeViewController: UIViewController {
     
-    
     // MARK: @IBOutlets
     
     @IBOutlet weak var weightLabel: UILabel!
@@ -32,16 +31,10 @@ class HomeViewController: UIViewController {
         }
     }
     
-    
-    
     // MARK: Properties
     
     private let pickerView = UIPickerView()
     private let activities = [Activity.none, Activity.low, Activity.medium, Activity.high]
-    
-    
-    
-    
     
     // MARK: Lifecycle method
     

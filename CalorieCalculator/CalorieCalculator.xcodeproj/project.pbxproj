@@ -158,6 +158,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5EDA9D6529C470B100DF6575 /* Build configuration list for PBXNativeTarget "CalorieCalculator" */;
 			buildPhases = (
+				5E7F724429C8983800D93F38 /* ShellScript */,
 				1B2FCABEB3ABAE4D576EEDC9 /* [CP] Check Pods Manifest.lock */,
 				5E7F723A29C85BEA00D93F38 /* ShellScript */,
 				5EDA9D4D29C470B000DF6575 /* Sources */,
@@ -264,6 +265,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"$PODS_ROOT/R.swift/rswift\" generate \"$SRCROOT/R.generated.swift\"\n";
+		};
+		5E7F724429C8983800D93F38 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "${PODS_ROOT}/SwiftLint/swiftlint\n";
 		};
 		DEACD1CE31E442C7D9F6045F /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;

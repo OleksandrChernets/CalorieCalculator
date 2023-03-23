@@ -8,11 +8,10 @@
 import UIKit
 
 class ActivityListViewController: UIViewController {
-
     @IBOutlet weak var detailLabel: UILabel!
-    
+
      var activity: Activity?
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -22,7 +21,4 @@ class ActivityListViewController: UIViewController {
             detailLabel.text = "No selected activity"
         }
     }
-    
-
-    
 }
