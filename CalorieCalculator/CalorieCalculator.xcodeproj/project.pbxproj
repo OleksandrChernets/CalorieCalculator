@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 55;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -158,8 +158,8 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5EDA9D6529C470B100DF6575 /* Build configuration list for PBXNativeTarget "CalorieCalculator" */;
 			buildPhases = (
-				5E7F724429C8983800D93F38 /* ShellScript */,
 				1B2FCABEB3ABAE4D576EEDC9 /* [CP] Check Pods Manifest.lock */,
+				5E7F724429C8983800D93F38 /* ShellScript */,
 				5E7F723A29C85BEA00D93F38 /* ShellScript */,
 				5EDA9D4D29C470B000DF6575 /* Sources */,
 				5EDA9D4E29C470B000DF6575 /* Frameworks */,
@@ -191,7 +191,7 @@
 				};
 			};
 			buildConfigurationList = 5EDA9D4C29C470B000DF6575 /* Build configuration list for PBXProject "CalorieCalculator" */;
-			compatibilityVersion = "Xcode 14.0";
+			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -260,7 +260,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				$SRCROOT/R.generated.swift,
+				"$SRCROOT/R.generated.swift",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;

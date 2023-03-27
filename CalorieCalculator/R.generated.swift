@@ -4,371 +4,768 @@
 //
 
 import Foundation
-import RswiftResources
+import Rswift
 import UIKit
 
-private class BundleFinder {}
-let R = _R(bundle: Bundle(for: BundleFinder.self))
+/// This `R` struct is generated and contains references to static resources.
+struct R: Rswift.Validatable {
+  fileprivate static let applicationLocale = hostingBundle.preferredLocalizations.first.flatMap { Locale(identifier: $0) } ?? Locale.current
+  fileprivate static let hostingBundle = Bundle(for: R.Class.self)
 
-struct _R {
-  let bundle: Foundation.Bundle
+  /// Find first language and bundle for which the table exists
+  fileprivate static func localeBundle(tableName: String, preferredLanguages: [String]) -> (Foundation.Locale, Foundation.Bundle)? {
+    // Filter preferredLanguages to localizations, use first locale
+    var languages = preferredLanguages
+      .map { Locale(identifier: $0) }
+      .prefix(1)
+      .flatMap { locale -> [String] in
+        if hostingBundle.localizations.contains(locale.identifier) {
+          if let language = locale.languageCode, hostingBundle.localizations.contains(language) {
+            return [locale.identifier, language]
+          } else {
+            return [locale.identifier]
+          }
+        } else if let language = locale.languageCode, hostingBundle.localizations.contains(language) {
+          return [language]
+        } else {
+          return []
+        }
+      }
 
-  let segue = segue()
+    // If there's no languages, use development language as backstop
+    if languages.isEmpty {
+      if let developmentLocalization = hostingBundle.developmentLocalization {
+        languages = [developmentLocalization]
+      }
+    } else {
+      // Insert Base as second item (between locale identifier and languageCode)
+      languages.insert("Base", at: 1)
 
-  var string: string { .init(bundle: bundle, preferredLanguages: nil, locale: nil) }
-  var color: color { .init(bundle: bundle) }
-  var info: info { .init(bundle: bundle) }
-  var file: file { .init(bundle: bundle) }
-  var storyboard: storyboard { .init(bundle: bundle) }
+      // Add development language as backstop
+      if let developmentLocalization = hostingBundle.developmentLocalization {
+        languages.append(developmentLocalization)
+      }
+    }
 
-  func string(bundle: Foundation.Bundle) -> string {
-    .init(bundle: bundle, preferredLanguages: nil, locale: nil)
-  }
-  func string(locale: Foundation.Locale) -> string {
-    .init(bundle: bundle, preferredLanguages: nil, locale: locale)
-  }
-  func string(preferredLanguages: [String], locale: Locale? = nil) -> string {
-    .init(bundle: bundle, preferredLanguages: preferredLanguages, locale: locale)
-  }
-  func color(bundle: Foundation.Bundle) -> color {
-    .init(bundle: bundle)
-  }
-  func info(bundle: Foundation.Bundle) -> info {
-    .init(bundle: bundle)
-  }
-  func file(bundle: Foundation.Bundle) -> file {
-    .init(bundle: bundle)
-  }
-  func storyboard(bundle: Foundation.Bundle) -> storyboard {
-    .init(bundle: bundle)
-  }
-  func validate() throws {
-    try self.storyboard.validate()
-  }
+    // Find first language for which table exists
+    // Note: key might not exist in chosen language (in that case, key will be shown)
+    for language in languages {
+      if let lproj = hostingBundle.url(forResource: language, withExtension: "lproj"),
+         let lbundle = Bundle(url: lproj)
+      {
+        let strings = lbundle.url(forResource: tableName, withExtension: "strings")
+        let stringsdict = lbundle.url(forResource: tableName, withExtension: "stringsdict")
 
-  struct project {
-    let developmentRegion = "en"
+        if strings != nil || stringsdict != nil {
+          return (Locale(identifier: language), lbundle)
+        }
+      }
+    }
+
+    // If table is available in main bundle, don't look for localized resources
+    let strings = hostingBundle.url(forResource: tableName, withExtension: "strings", subdirectory: nil, localization: nil)
+    let stringsdict = hostingBundle.url(forResource: tableName, withExtension: "stringsdict", subdirectory: nil, localization: nil)
+
+    if strings != nil || stringsdict != nil {
+      return (applicationLocale, hostingBundle)
+    }
+
+    // If table is not found for requested languages, key will be shown
+    return nil
   }
 
-  /// This `_R.string` struct is generated, and contains static references to 2 localization tables.
+  /// Load string from Info.plist file
+  fileprivate static func infoPlistString(path: [String], key: String) -> String? {
+    var dict = hostingBundle.infoDictionary
+    for step in path {
+      guard let obj = dict?[step] as? [String: Any] else { return nil }
+      dict = obj
+    }
+    return dict?[key] as? String
+  }
+
+  static func validate() throws {
+    try intern.validate()
+  }
+
+  #if os(iOS) || os(tvOS)
+  /// This `R.segue` struct is generated, and contains static references to 1 view controllers.
+  struct segue {
+    /// This struct is generated for `HomeViewController`, and contains static references to 1 segues.
+    struct homeViewController {
+      /// Segue identifier `segue`.
+      static let segue: Rswift.StoryboardSegueIdentifier<UIKit.UIStoryboardSegue, HomeViewController, ActivityListViewController> = Rswift.StoryboardSegueIdentifier(identifier: "segue")
+
+      #if os(iOS) || os(tvOS)
+      /// Optionally returns a typed version of segue `segue`.
+      /// Returns nil if either the segue identifier, the source, destination, or segue types don't match.
+      /// For use inside `prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)`.
+      static func segue(segue: UIKit.UIStoryboardSegue) -> Rswift.TypedStoryboardSegueInfo<UIKit.UIStoryboardSegue, HomeViewController, ActivityListViewController>? {
+        return Rswift.TypedStoryboardSegueInfo(segueIdentifier: R.segue.homeViewController.segue, segue: segue)
+      }
+      #endif
+
+      fileprivate init() {}
+    }
+
+    fileprivate init() {}
+  }
+  #endif
+
+  #if os(iOS) || os(tvOS)
+  /// This `R.storyboard` struct is generated, and contains static references to 2 storyboards.
+  struct storyboard {
+    /// Storyboard `LaunchScreen`.
+    static let launchScreen = _R.storyboard.launchScreen()
+    /// Storyboard `Main`.
+    static let main = _R.storyboard.main()
+
+    #if os(iOS) || os(tvOS)
+    /// `UIStoryboard(name: "LaunchScreen", bundle: ...)`
+    static func launchScreen(_: Void = ()) -> UIKit.UIStoryboard {
+      return UIKit.UIStoryboard(resource: R.storyboard.launchScreen)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIStoryboard(name: "Main", bundle: ...)`
+    static func main(_: Void = ()) -> UIKit.UIStoryboard {
+      return UIKit.UIStoryboard(resource: R.storyboard.main)
+    }
+    #endif
+
+    fileprivate init() {}
+  }
+  #endif
+
+  /// This `R.color` struct is generated, and contains static references to 1 colors.
+  struct color {
+    /// Color `AccentColor`.
+    static let accentColor = Rswift.ColorResource(bundle: R.hostingBundle, name: "AccentColor")
+
+    #if os(iOS) || os(tvOS)
+    /// `UIColor(named: "AccentColor", bundle: ..., traitCollection: ...)`
+    @available(tvOS 11.0, *)
+    @available(iOS 11.0, *)
+    static func accentColor(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
+      return UIKit.UIColor(resource: R.color.accentColor, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(watchOS)
+    /// `UIColor(named: "AccentColor", bundle: ..., traitCollection: ...)`
+    @available(watchOSApplicationExtension 4.0, *)
+    static func accentColor(_: Void = ()) -> UIKit.UIColor? {
+      return UIKit.UIColor(named: R.color.accentColor.name)
+    }
+    #endif
+
+    fileprivate init() {}
+  }
+
+  /// This `R.file` struct is generated, and contains static references to 1 files.
+  struct file {
+    /// Resource file `Podfile`.
+    static let podfile = Rswift.FileResource(bundle: R.hostingBundle, name: "Podfile", pathExtension: "")
+
+    /// `bundle.url(forResource: "Podfile", withExtension: "")`
+    static func podfile(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.podfile
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+
+    fileprivate init() {}
+  }
+
+  /// This `R.info` struct is generated, and contains static references to 1 properties.
+  struct info {
+    struct uiApplicationSceneManifest {
+      static let _key = "UIApplicationSceneManifest"
+      static let uiApplicationSupportsMultipleScenes = false
+
+      struct uiSceneConfigurations {
+        static let _key = "UISceneConfigurations"
+
+        struct uiWindowSceneSessionRoleApplication {
+          struct defaultConfiguration {
+            static let _key = "Default Configuration"
+            static let uiSceneConfigurationName = infoPlistString(path: ["UIApplicationSceneManifest", "UISceneConfigurations", "UIWindowSceneSessionRoleApplication", "Default Configuration"], key: "UISceneConfigurationName") ?? "Default Configuration"
+            static let uiSceneDelegateClassName = infoPlistString(path: ["UIApplicationSceneManifest", "UISceneConfigurations", "UIWindowSceneSessionRoleApplication", "Default Configuration"], key: "UISceneDelegateClassName") ?? "$(PRODUCT_MODULE_NAME).SceneDelegate"
+            static let uiSceneStoryboardFile = infoPlistString(path: ["UIApplicationSceneManifest", "UISceneConfigurations", "UIWindowSceneSessionRoleApplication", "Default Configuration"], key: "UISceneStoryboardFile") ?? "Main"
+
+            fileprivate init() {}
+          }
+
+          fileprivate init() {}
+        }
+
+        fileprivate init() {}
+      }
+
+      fileprivate init() {}
+    }
+
+    fileprivate init() {}
+  }
+
+  /// This `R.string` struct is generated, and contains static references to 2 localization tables.
   struct string {
-    let bundle: Foundation.Bundle
-    let preferredLanguages: [String]?
-    let locale: Locale?
-    var localizable: localizable { .init(source: .init(bundle: bundle, tableName: "Localizable", preferredLanguages: preferredLanguages, locale: locale)) }
-    var main: main { .init(source: .init(bundle: bundle, tableName: "Main", preferredLanguages: preferredLanguages, locale: locale)) }
-
-    func localizable(preferredLanguages: [String]) -> localizable {
-      .init(source: .init(bundle: bundle, tableName: "Localizable", preferredLanguages: preferredLanguages, locale: locale))
-    }
-    func main(preferredLanguages: [String]) -> main {
-      .init(source: .init(bundle: bundle, tableName: "Main", preferredLanguages: preferredLanguages, locale: locale))
-    }
-
-
-    /// This `_R.string.localizable` struct is generated, and contains static references to 14 localization keys.
+    /// This `R.string.localizable` struct is generated, and contains static references to 14 localization keys.
     struct localizable {
-      let source: RswiftResources.StringResource.Source
-
+      /// en translation: Age
+      ///
+      /// Locales: en, uk
+      static let calculatorAgeLabel = Rswift.StringResource(key: "Calculator.ageLabel", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "uk"], comment: nil)
+      /// en translation: Calculate
+      ///
+      /// Locales: en, uk
+      static let calculatorCalculateButton = Rswift.StringResource(key: "Calculator.calculateButton", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "uk"], comment: nil)
+      /// en translation: Clear
+      ///
+      /// Locales: en, uk
+      static let calculatorClearButton = Rswift.StringResource(key: "Calculator.clearButton", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "uk"], comment: nil)
+      /// en translation: Female
+      ///
+      /// Locales: en, uk
+      static let genderFamele = Rswift.StringResource(key: "Gender.famele", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "uk"], comment: nil)
+      /// en translation: Height
+      ///
+      /// Locales: en, uk
+      static let calculatorHeightLabel = Rswift.StringResource(key: "Calculator.heightLabel", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "uk"], comment: nil)
       /// en translation: High
       ///
-      /// Key: Activity.high
-      ///
       /// Locales: en, uk
-      var activityHigh: RswiftResources.StringResource { .init(key: "Activity.high", tableName: "Localizable", source: source, developmentValue: "High", comment: nil) }
-
+      static let activityHigh = Rswift.StringResource(key: "Activity.high", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "uk"], comment: nil)
       /// en translation: Low
       ///
-      /// Key: Activity.low
+      /// Locales: en, uk
+      static let activityLow = Rswift.StringResource(key: "Activity.low", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "uk"], comment: nil)
+      /// en translation: Male
       ///
       /// Locales: en, uk
-      var activityLow: RswiftResources.StringResource { .init(key: "Activity.low", tableName: "Localizable", source: source, developmentValue: "Low", comment: nil) }
-
+      static let genderMale = Rswift.StringResource(key: "Gender.male", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "uk"], comment: nil)
       /// en translation: Medium
       ///
-      /// Key: Activity.medium
-      ///
       /// Locales: en, uk
-      var activityMedium: RswiftResources.StringResource { .init(key: "Activity.medium", tableName: "Localizable", source: source, developmentValue: "Medium", comment: nil) }
-
+      static let activityMedium = Rswift.StringResource(key: "Activity.medium", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "uk"], comment: nil)
       /// en translation: None
       ///
-      /// Key: Activity.none
-      ///
       /// Locales: en, uk
-      var activityNone: RswiftResources.StringResource { .init(key: "Activity.none", tableName: "Localizable", source: source, developmentValue: "None", comment: nil) }
-
-      /// en translation: Your result
-      ///
-      /// Key: Alert.result
-      ///
-      /// Locales: en, uk
-      var alertResult: RswiftResources.StringResource { .init(key: "Alert.result", tableName: "Localizable", source: source, developmentValue: "Your result", comment: nil) }
-
-      /// en translation: Show detail
-      ///
-      /// Key: Alert.showDetail
-      ///
-      /// Locales: en, uk
-      var alertShowDetail: RswiftResources.StringResource { .init(key: "Alert.showDetail", tableName: "Localizable", source: source, developmentValue: "Show detail", comment: nil) }
-
+      static let activityNone = Rswift.StringResource(key: "Activity.none", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "uk"], comment: nil)
       /// en translation: Physical Activity
       ///
-      /// Key: Calculator.activityLabel
+      /// Locales: en, uk
+      static let calculatorActivityLabel = Rswift.StringResource(key: "Calculator.activityLabel", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "uk"], comment: nil)
+      /// en translation: Show detail
       ///
       /// Locales: en, uk
-      var calculatorActivityLabel: RswiftResources.StringResource { .init(key: "Calculator.activityLabel", tableName: "Localizable", source: source, developmentValue: "Physical Activity", comment: nil) }
+      static let alertShowDetail = Rswift.StringResource(key: "Alert.showDetail", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "uk"], comment: nil)
+      /// en translation: Weight
+      ///
+      /// Locales: en, uk
+      static let calculatorWeightLabel = Rswift.StringResource(key: "Calculator.weightLabel", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "uk"], comment: nil)
+      /// en translation: Your result
+      ///
+      /// Locales: en, uk
+      static let alertResult = Rswift.StringResource(key: "Alert.result", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "uk"], comment: nil)
 
       /// en translation: Age
       ///
-      /// Key: Calculator.ageLabel
-      ///
       /// Locales: en, uk
-      var calculatorAgeLabel: RswiftResources.StringResource { .init(key: "Calculator.ageLabel", tableName: "Localizable", source: source, developmentValue: "Age", comment: nil) }
+      static func calculatorAgeLabel(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("Calculator.ageLabel", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "Localizable", preferredLanguages: preferredLanguages) else {
+          return "Calculator.ageLabel"
+        }
+
+        return NSLocalizedString("Calculator.ageLabel", bundle: bundle, comment: "")
+      }
 
       /// en translation: Calculate
       ///
-      /// Key: Calculator.calculateButton
-      ///
       /// Locales: en, uk
-      var calculatorCalculateButton: RswiftResources.StringResource { .init(key: "Calculator.calculateButton", tableName: "Localizable", source: source, developmentValue: "Calculate", comment: nil) }
+      static func calculatorCalculateButton(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("Calculator.calculateButton", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "Localizable", preferredLanguages: preferredLanguages) else {
+          return "Calculator.calculateButton"
+        }
+
+        return NSLocalizedString("Calculator.calculateButton", bundle: bundle, comment: "")
+      }
 
       /// en translation: Clear
       ///
-      /// Key: Calculator.clearButton
-      ///
       /// Locales: en, uk
-      var calculatorClearButton: RswiftResources.StringResource { .init(key: "Calculator.clearButton", tableName: "Localizable", source: source, developmentValue: "Clear", comment: nil) }
+      static func calculatorClearButton(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("Calculator.clearButton", bundle: hostingBundle, comment: "")
+        }
 
-      /// en translation: Height
-      ///
-      /// Key: Calculator.heightLabel
-      ///
-      /// Locales: en, uk
-      var calculatorHeightLabel: RswiftResources.StringResource { .init(key: "Calculator.heightLabel", tableName: "Localizable", source: source, developmentValue: "Height", comment: nil) }
+        guard let (_, bundle) = localeBundle(tableName: "Localizable", preferredLanguages: preferredLanguages) else {
+          return "Calculator.clearButton"
+        }
 
-      /// en translation: Weight
-      ///
-      /// Key: Calculator.weightLabel
-      ///
-      /// Locales: en, uk
-      var calculatorWeightLabel: RswiftResources.StringResource { .init(key: "Calculator.weightLabel", tableName: "Localizable", source: source, developmentValue: "Weight", comment: nil) }
+        return NSLocalizedString("Calculator.clearButton", bundle: bundle, comment: "")
+      }
 
       /// en translation: Female
       ///
-      /// Key: Gender.famele
+      /// Locales: en, uk
+      static func genderFamele(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("Gender.famele", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "Localizable", preferredLanguages: preferredLanguages) else {
+          return "Gender.famele"
+        }
+
+        return NSLocalizedString("Gender.famele", bundle: bundle, comment: "")
+      }
+
+      /// en translation: Height
       ///
       /// Locales: en, uk
-      var genderFamele: RswiftResources.StringResource { .init(key: "Gender.famele", tableName: "Localizable", source: source, developmentValue: "Female", comment: nil) }
+      static func calculatorHeightLabel(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("Calculator.heightLabel", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "Localizable", preferredLanguages: preferredLanguages) else {
+          return "Calculator.heightLabel"
+        }
+
+        return NSLocalizedString("Calculator.heightLabel", bundle: bundle, comment: "")
+      }
+
+      /// en translation: High
+      ///
+      /// Locales: en, uk
+      static func activityHigh(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("Activity.high", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "Localizable", preferredLanguages: preferredLanguages) else {
+          return "Activity.high"
+        }
+
+        return NSLocalizedString("Activity.high", bundle: bundle, comment: "")
+      }
+
+      /// en translation: Low
+      ///
+      /// Locales: en, uk
+      static func activityLow(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("Activity.low", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "Localizable", preferredLanguages: preferredLanguages) else {
+          return "Activity.low"
+        }
+
+        return NSLocalizedString("Activity.low", bundle: bundle, comment: "")
+      }
 
       /// en translation: Male
       ///
-      /// Key: Gender.male
+      /// Locales: en, uk
+      static func genderMale(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("Gender.male", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "Localizable", preferredLanguages: preferredLanguages) else {
+          return "Gender.male"
+        }
+
+        return NSLocalizedString("Gender.male", bundle: bundle, comment: "")
+      }
+
+      /// en translation: Medium
       ///
       /// Locales: en, uk
-      var genderMale: RswiftResources.StringResource { .init(key: "Gender.male", tableName: "Localizable", source: source, developmentValue: "Male", comment: nil) }
+      static func activityMedium(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("Activity.medium", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "Localizable", preferredLanguages: preferredLanguages) else {
+          return "Activity.medium"
+        }
+
+        return NSLocalizedString("Activity.medium", bundle: bundle, comment: "")
+      }
+
+      /// en translation: None
+      ///
+      /// Locales: en, uk
+      static func activityNone(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("Activity.none", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "Localizable", preferredLanguages: preferredLanguages) else {
+          return "Activity.none"
+        }
+
+        return NSLocalizedString("Activity.none", bundle: bundle, comment: "")
+      }
+
+      /// en translation: Physical Activity
+      ///
+      /// Locales: en, uk
+      static func calculatorActivityLabel(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("Calculator.activityLabel", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "Localizable", preferredLanguages: preferredLanguages) else {
+          return "Calculator.activityLabel"
+        }
+
+        return NSLocalizedString("Calculator.activityLabel", bundle: bundle, comment: "")
+      }
+
+      /// en translation: Show detail
+      ///
+      /// Locales: en, uk
+      static func alertShowDetail(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("Alert.showDetail", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "Localizable", preferredLanguages: preferredLanguages) else {
+          return "Alert.showDetail"
+        }
+
+        return NSLocalizedString("Alert.showDetail", bundle: bundle, comment: "")
+      }
+
+      /// en translation: Weight
+      ///
+      /// Locales: en, uk
+      static func calculatorWeightLabel(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("Calculator.weightLabel", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "Localizable", preferredLanguages: preferredLanguages) else {
+          return "Calculator.weightLabel"
+        }
+
+        return NSLocalizedString("Calculator.weightLabel", bundle: bundle, comment: "")
+      }
+
+      /// en translation: Your result
+      ///
+      /// Locales: en, uk
+      static func alertResult(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("Alert.result", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "Localizable", preferredLanguages: preferredLanguages) else {
+          return "Alert.result"
+        }
+
+        return NSLocalizedString("Alert.result", bundle: bundle, comment: "")
+      }
+
+      fileprivate init() {}
     }
 
-    /// This `_R.string.main` struct is generated, and contains static references to 11 localization keys.
+    /// This `R.string.main` struct is generated, and contains static references to 11 localization keys.
     struct main {
-      let source: RswiftResources.StringResource.Source
-
-      /// uk translation: Label
-      ///
-      /// Key: 4C3-Kz-3Wh.text
+      /// uk translation: Age
       ///
       /// Locales: uk
-      var c3Kz3WhText: RswiftResources.StringResource { .init(key: "4C3-Kz-3Wh.text", tableName: "Main", source: source, developmentValue: nil, comment: nil) }
-
-      /// uk translation: Physical Activity
-      ///
-      /// Key: 9jG-ws-mNc.text
-      ///
-      /// Locales: uk
-      var jGWsMNcText: RswiftResources.StringResource { .init(key: "9jG-ws-mNc.text", tableName: "Main", source: source, developmentValue: nil, comment: nil) }
-
-      /// uk translation: Calculate
-      ///
-      /// Key: Lfe-r9-he5.configuration.title
-      ///
-      /// Locales: uk
-      var lfeR9He5ConfigurationTitle: RswiftResources.StringResource { .init(key: "Lfe-r9-he5.configuration.title", tableName: "Main", source: source, developmentValue: nil, comment: nil) }
-
+      static let gorEpG8VText = Rswift.StringResource(key: "gor-ep-g8V.text", tableName: "Main", bundle: R.hostingBundle, locales: ["uk"], comment: nil)
       /// uk translation: Button
       ///
-      /// Key: Lfe-r9-he5.normalTitle
+      /// Locales: uk
+      static let iTYUEUORNormalTitle = Rswift.StringResource(key: "iTY-uE-UOR.normalTitle", tableName: "Main", bundle: R.hostingBundle, locales: ["uk"], comment: nil)
+      /// uk translation: Button
       ///
       /// Locales: uk
-      var lfeR9He5NormalTitle: RswiftResources.StringResource { .init(key: "Lfe-r9-he5.normalTitle", tableName: "Main", source: source, developmentValue: nil, comment: nil) }
-
-      /// uk translation: Height
-      ///
-      /// Key: T09-qL-7gC.text
+      static let lfeR9He5NormalTitle = Rswift.StringResource(key: "Lfe-r9-he5.normalTitle", tableName: "Main", bundle: R.hostingBundle, locales: ["uk"], comment: nil)
+      /// uk translation: Calculate
       ///
       /// Locales: uk
-      var t09QL7gCText: RswiftResources.StringResource { .init(key: "T09-qL-7gC.text", tableName: "Main", source: source, developmentValue: nil, comment: nil) }
-
-      /// uk translation: Weight
-      ///
-      /// Key: ZZf-gy-clR.text
+      static let lfeR9He5ConfigurationTitle = Rswift.StringResource(key: "Lfe-r9-he5.configuration.title", tableName: "Main", bundle: R.hostingBundle, locales: ["uk"], comment: nil)
+      /// uk translation: Clear
       ///
       /// Locales: uk
-      var zZfGyClRText: RswiftResources.StringResource { .init(key: "ZZf-gy-clR.text", tableName: "Main", source: source, developmentValue: nil, comment: nil) }
-
+      static let iTYUEUORConfigurationTitle = Rswift.StringResource(key: "iTY-uE-UOR.configuration.title", tableName: "Main", bundle: R.hostingBundle, locales: ["uk"], comment: nil)
       /// uk translation: First
       ///
-      /// Key: bzP-5g-O2e.segmentTitles[0]
+      /// Locales: uk
+      static let bzP5gO2eSegmentTitles0 = Rswift.StringResource(key: "bzP-5g-O2e.segmentTitles[0]", tableName: "Main", bundle: R.hostingBundle, locales: ["uk"], comment: nil)
+      /// uk translation: Height
       ///
       /// Locales: uk
-      var bzP5gO2eSegmentTitles0: RswiftResources.StringResource { .init(key: "bzP-5g-O2e.segmentTitles[0]", tableName: "Main", source: source, developmentValue: nil, comment: nil) }
-
+      static let t09QL7gCText = Rswift.StringResource(key: "T09-qL-7gC.text", tableName: "Main", bundle: R.hostingBundle, locales: ["uk"], comment: nil)
+      /// uk translation: Label
+      ///
+      /// Locales: uk
+      static let c3Kz3WhText = Rswift.StringResource(key: "4C3-Kz-3Wh.text", tableName: "Main", bundle: R.hostingBundle, locales: ["uk"], comment: nil)
+      /// uk translation: Physical Activity
+      ///
+      /// Locales: uk
+      static let jGWsMNcText = Rswift.StringResource(key: "9jG-ws-mNc.text", tableName: "Main", bundle: R.hostingBundle, locales: ["uk"], comment: nil)
       /// uk translation: Second
       ///
-      /// Key: bzP-5g-O2e.segmentTitles[1]
+      /// Locales: uk
+      static let bzP5gO2eSegmentTitles1 = Rswift.StringResource(key: "bzP-5g-O2e.segmentTitles[1]", tableName: "Main", bundle: R.hostingBundle, locales: ["uk"], comment: nil)
+      /// uk translation: Weight
       ///
       /// Locales: uk
-      var bzP5gO2eSegmentTitles1: RswiftResources.StringResource { .init(key: "bzP-5g-O2e.segmentTitles[1]", tableName: "Main", source: source, developmentValue: nil, comment: nil) }
+      static let zZfGyClRText = Rswift.StringResource(key: "ZZf-gy-clR.text", tableName: "Main", bundle: R.hostingBundle, locales: ["uk"], comment: nil)
 
       /// uk translation: Age
       ///
-      /// Key: gor-ep-g8V.text
-      ///
       /// Locales: uk
-      var gorEpG8VText: RswiftResources.StringResource { .init(key: "gor-ep-g8V.text", tableName: "Main", source: source, developmentValue: nil, comment: nil) }
+      static func gorEpG8VText(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("gor-ep-g8V.text", tableName: "Main", bundle: hostingBundle, comment: "")
+        }
 
-      /// uk translation: Clear
-      ///
-      /// Key: iTY-uE-UOR.configuration.title
-      ///
-      /// Locales: uk
-      var iTYUEUORConfigurationTitle: RswiftResources.StringResource { .init(key: "iTY-uE-UOR.configuration.title", tableName: "Main", source: source, developmentValue: nil, comment: nil) }
+        guard let (_, bundle) = localeBundle(tableName: "Main", preferredLanguages: preferredLanguages) else {
+          return "gor-ep-g8V.text"
+        }
+
+        return NSLocalizedString("gor-ep-g8V.text", tableName: "Main", bundle: bundle, comment: "")
+      }
 
       /// uk translation: Button
       ///
-      /// Key: iTY-uE-UOR.normalTitle
+      /// Locales: uk
+      static func iTYUEUORNormalTitle(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("iTY-uE-UOR.normalTitle", tableName: "Main", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "Main", preferredLanguages: preferredLanguages) else {
+          return "iTY-uE-UOR.normalTitle"
+        }
+
+        return NSLocalizedString("iTY-uE-UOR.normalTitle", tableName: "Main", bundle: bundle, comment: "")
+      }
+
+      /// uk translation: Button
       ///
       /// Locales: uk
-      var iTYUEUORNormalTitle: RswiftResources.StringResource { .init(key: "iTY-uE-UOR.normalTitle", tableName: "Main", source: source, developmentValue: nil, comment: nil) }
-    }
-  }
-
-  /// This `_R.color` struct is generated, and contains static references to 1 colors.
-  struct color {
-    let bundle: Foundation.Bundle
-
-    /// Color `AccentColor`.
-    var accentColor: RswiftResources.ColorResource { .init(name: "AccentColor", path: [], bundle: bundle) }
-  }
-
-  /// This `_R.info` struct is generated, and contains static references to 1 properties.
-  struct info {
-    let bundle: Foundation.Bundle
-    var uiApplicationSceneManifest: uiApplicationSceneManifest { .init(bundle: bundle) }
-
-    func uiApplicationSceneManifest(bundle: Foundation.Bundle) -> uiApplicationSceneManifest {
-      .init(bundle: bundle)
-    }
-
-    struct uiApplicationSceneManifest {
-      let bundle: Foundation.Bundle
-
-      let uiApplicationSupportsMultipleScenes: Bool = false
-
-      var _key: String { bundle.infoDictionaryString(path: ["UIApplicationSceneManifest"], key: "_key") ?? "UIApplicationSceneManifest" }
-      var uiSceneConfigurations: uiSceneConfigurations { .init(bundle: bundle) }
-
-      func uiSceneConfigurations(bundle: Foundation.Bundle) -> uiSceneConfigurations {
-        .init(bundle: bundle)
-      }
-
-      struct uiSceneConfigurations {
-        let bundle: Foundation.Bundle
-        var _key: String { bundle.infoDictionaryString(path: ["UIApplicationSceneManifest", "UISceneConfigurations"], key: "_key") ?? "UISceneConfigurations" }
-        var uiWindowSceneSessionRoleApplication: uiWindowSceneSessionRoleApplication { .init(bundle: bundle) }
-
-        func uiWindowSceneSessionRoleApplication(bundle: Foundation.Bundle) -> uiWindowSceneSessionRoleApplication {
-          .init(bundle: bundle)
+      static func lfeR9He5NormalTitle(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("Lfe-r9-he5.normalTitle", tableName: "Main", bundle: hostingBundle, comment: "")
         }
 
-        struct uiWindowSceneSessionRoleApplication {
-          let bundle: Foundation.Bundle
-          var defaultConfiguration: defaultConfiguration { .init(bundle: bundle) }
-
-          func defaultConfiguration(bundle: Foundation.Bundle) -> defaultConfiguration {
-            .init(bundle: bundle)
-          }
-
-          struct defaultConfiguration {
-            let bundle: Foundation.Bundle
-            var uiSceneConfigurationName: String { bundle.infoDictionaryString(path: ["UIApplicationSceneManifest", "UISceneConfigurations", "UIWindowSceneSessionRoleApplication"], key: "UISceneConfigurationName") ?? "Default Configuration" }
-            var uiSceneDelegateClassName: String { bundle.infoDictionaryString(path: ["UIApplicationSceneManifest", "UISceneConfigurations", "UIWindowSceneSessionRoleApplication"], key: "UISceneDelegateClassName") ?? "$(PRODUCT_MODULE_NAME).SceneDelegate" }
-            var uiSceneStoryboardFile: String { bundle.infoDictionaryString(path: ["UIApplicationSceneManifest", "UISceneConfigurations", "UIWindowSceneSessionRoleApplication"], key: "UISceneStoryboardFile") ?? "Main" }
-          }
+        guard let (_, bundle) = localeBundle(tableName: "Main", preferredLanguages: preferredLanguages) else {
+          return "Lfe-r9-he5.normalTitle"
         }
+
+        return NSLocalizedString("Lfe-r9-he5.normalTitle", tableName: "Main", bundle: bundle, comment: "")
       }
+
+      /// uk translation: Calculate
+      ///
+      /// Locales: uk
+      static func lfeR9He5ConfigurationTitle(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("Lfe-r9-he5.configuration.title", tableName: "Main", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "Main", preferredLanguages: preferredLanguages) else {
+          return "Lfe-r9-he5.configuration.title"
+        }
+
+        return NSLocalizedString("Lfe-r9-he5.configuration.title", tableName: "Main", bundle: bundle, comment: "")
+      }
+
+      /// uk translation: Clear
+      ///
+      /// Locales: uk
+      static func iTYUEUORConfigurationTitle(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("iTY-uE-UOR.configuration.title", tableName: "Main", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "Main", preferredLanguages: preferredLanguages) else {
+          return "iTY-uE-UOR.configuration.title"
+        }
+
+        return NSLocalizedString("iTY-uE-UOR.configuration.title", tableName: "Main", bundle: bundle, comment: "")
+      }
+
+      /// uk translation: First
+      ///
+      /// Locales: uk
+      static func bzP5gO2eSegmentTitles0(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("bzP-5g-O2e.segmentTitles[0]", tableName: "Main", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "Main", preferredLanguages: preferredLanguages) else {
+          return "bzP-5g-O2e.segmentTitles[0]"
+        }
+
+        return NSLocalizedString("bzP-5g-O2e.segmentTitles[0]", tableName: "Main", bundle: bundle, comment: "")
+      }
+
+      /// uk translation: Height
+      ///
+      /// Locales: uk
+      static func t09QL7gCText(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("T09-qL-7gC.text", tableName: "Main", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "Main", preferredLanguages: preferredLanguages) else {
+          return "T09-qL-7gC.text"
+        }
+
+        return NSLocalizedString("T09-qL-7gC.text", tableName: "Main", bundle: bundle, comment: "")
+      }
+
+      /// uk translation: Label
+      ///
+      /// Locales: uk
+      static func c3Kz3WhText(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("4C3-Kz-3Wh.text", tableName: "Main", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "Main", preferredLanguages: preferredLanguages) else {
+          return "4C3-Kz-3Wh.text"
+        }
+
+        return NSLocalizedString("4C3-Kz-3Wh.text", tableName: "Main", bundle: bundle, comment: "")
+      }
+
+      /// uk translation: Physical Activity
+      ///
+      /// Locales: uk
+      static func jGWsMNcText(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("9jG-ws-mNc.text", tableName: "Main", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "Main", preferredLanguages: preferredLanguages) else {
+          return "9jG-ws-mNc.text"
+        }
+
+        return NSLocalizedString("9jG-ws-mNc.text", tableName: "Main", bundle: bundle, comment: "")
+      }
+
+      /// uk translation: Second
+      ///
+      /// Locales: uk
+      static func bzP5gO2eSegmentTitles1(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("bzP-5g-O2e.segmentTitles[1]", tableName: "Main", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "Main", preferredLanguages: preferredLanguages) else {
+          return "bzP-5g-O2e.segmentTitles[1]"
+        }
+
+        return NSLocalizedString("bzP-5g-O2e.segmentTitles[1]", tableName: "Main", bundle: bundle, comment: "")
+      }
+
+      /// uk translation: Weight
+      ///
+      /// Locales: uk
+      static func zZfGyClRText(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("ZZf-gy-clR.text", tableName: "Main", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "Main", preferredLanguages: preferredLanguages) else {
+          return "ZZf-gy-clR.text"
+        }
+
+        return NSLocalizedString("ZZf-gy-clR.text", tableName: "Main", bundle: bundle, comment: "")
+      }
+
+      fileprivate init() {}
     }
+
+    fileprivate init() {}
   }
 
-  /// This `_R.file` struct is generated, and contains static references to 1 resource files.
-  struct file {
-    let bundle: Foundation.Bundle
+  fileprivate struct intern: Rswift.Validatable {
+    fileprivate static func validate() throws {
+      try _R.validate()
+    }
 
-    /// Resource file `Podfile`.
-    var podfile: RswiftResources.FileResource { .init(name: "Podfile", pathExtension: "", bundle: bundle, locale: LocaleReference.none) }
+    fileprivate init() {}
   }
 
-  /// This `_R.segue` struct is generated, and contains static references to 1 view controllers.
-  struct segue {
-    let homeViewController = homeViewController()
+  fileprivate class Class {}
 
-    /// This struct is generated for `HomeViewController`, and contains static references to 1 segues.
-    struct homeViewController {
+  fileprivate init() {}
+}
 
-      /// Segue identifier `segue`.
-      var segue: RswiftResources.SegueIdentifier<UIKit.UIStoryboardSegue, HomeViewController, ActivityListViewController> { .init(identifier: "segue") }
-    }
+struct _R: Rswift.Validatable {
+  static func validate() throws {
+    #if os(iOS) || os(tvOS)
+    try storyboard.validate()
+    #endif
   }
 
-  /// This `_R.storyboard` struct is generated, and contains static references to 2 storyboards.
-  struct storyboard {
-    let bundle: Foundation.Bundle
-    var launchScreen: launchScreen { .init(bundle: bundle) }
-    var main: main { .init(bundle: bundle) }
-
-    func launchScreen(bundle: Foundation.Bundle) -> launchScreen {
-      .init(bundle: bundle)
-    }
-    func main(bundle: Foundation.Bundle) -> main {
-      .init(bundle: bundle)
-    }
-    func validate() throws {
-      try self.launchScreen.validate()
-      try self.main.validate()
+  #if os(iOS) || os(tvOS)
+  struct storyboard: Rswift.Validatable {
+    static func validate() throws {
+      #if os(iOS) || os(tvOS)
+      try launchScreen.validate()
+      #endif
+      #if os(iOS) || os(tvOS)
+      try main.validate()
+      #endif
     }
 
-
-    /// Storyboard `LaunchScreen`.
-    struct launchScreen: RswiftResources.StoryboardReference, RswiftResources.InitialControllerContainer {
+    #if os(iOS) || os(tvOS)
+    struct launchScreen: Rswift.StoryboardResourceWithInitialControllerType, Rswift.Validatable {
       typealias InitialController = UIKit.UIViewController
 
-      let bundle: Foundation.Bundle
-
+      let bundle = R.hostingBundle
       let name = "LaunchScreen"
-      func validate() throws {
 
+      static func validate() throws {
+        if #available(iOS 11.0, tvOS 11.0, *) {
+        }
       }
-    }
 
-    /// Storyboard `Main`.
-    struct main: RswiftResources.StoryboardReference, RswiftResources.InitialControllerContainer {
+      fileprivate init() {}
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    struct main: Rswift.StoryboardResourceWithInitialControllerType, Rswift.Validatable {
       typealias InitialController = UIKit.UINavigationController
 
-      let bundle: Foundation.Bundle
-
+      let bundle = R.hostingBundle
       let name = "Main"
-      func validate() throws {
 
+      static func validate() throws {
+        if #available(iOS 11.0, tvOS 11.0, *) {
+        }
       }
+
+      fileprivate init() {}
     }
+    #endif
+
+    fileprivate init() {}
   }
+  #endif
+
+  fileprivate init() {}
 }
