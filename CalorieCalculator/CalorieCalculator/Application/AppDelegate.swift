@@ -7,6 +7,8 @@
 
 import UIKit
 
+// Silence warnings for R.generated file. (I am not found the betterplace for this comment)
+
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 

@@ -32,7 +32,6 @@ class HomeViewController: UIViewController {
     }
     
     // MARK: Properties
-    
     private let pickerView = UIPickerView()
     private let activities = [Activity.none, Activity.low, Activity.medium, Activity.high]
     
@@ -117,6 +116,7 @@ class HomeViewController: UIViewController {
         segmentControl.layer.cornerRadius = 15
     }
     
+    // It is better to group views not by type, but enities. Like configureWeightField
     public func configureTextField() {
         weightTextField.delegate = self
         weightTextField.keyboardType = .numberPad
@@ -139,30 +139,33 @@ class HomeViewController: UIViewController {
     }
     
     public func localizeUI() {
+        // Maybe it is better to add typealises for hidding long localuzable accesor. (Check resources session)
         weightLabel.text = R.string.localizable.calculatorWeightLabel()
         heightLabel.text = R.string.localizable.calculatorHeightLabel()
         ageLabel.text = R.string.localizable.calculatorAgeLabel()
         activityLabel.text = R.string.localizable.calculatorActivityLabel()
         calculateButton.setTitle(R.string.localizable.calculatorCalculateButton(), for: .normal)
         clearButton.setTitle(R.string.localizable.calculatorClearButton(), for: .normal)
-        
+        // Remove empty space
     }
 }
 
 // MARK: UITextFieldDelegate
 
 extension HomeViewController: UITextFieldDelegate {
+    // Before class, struct, extensions defining and func should be space
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let allowedCharacters = CharacterSet.decimalDigits
         let characterSet = CharacterSet(charactersIn: string)
         return allowedCharacters.isSuperset(of: characterSet)
-        
+        // Remove empty space
     }
 }
 
 // MARK: UIPickerViewDataSource && UIPickerViewDelegate
 
 extension HomeViewController: UIPickerViewDataSource, UIPickerViewDelegate {
+    // Before class, struct, extensions defining and func should be space
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
