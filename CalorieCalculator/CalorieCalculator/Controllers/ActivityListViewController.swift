@@ -7,11 +7,15 @@
 
 import UIKit
 
-class ActivityListViewController: UIViewController {
-    @IBOutlet weak var detailLabel: UILabel!
+final class ActivityListViewController: UIViewController {
+    
+    //MARK: @IBOutlets
+    @IBOutlet private weak var detailLabel: UILabel!
 
+    //MARK: Properties
      var activity: Activity?
 
+    //MARK: Lifecycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
 
