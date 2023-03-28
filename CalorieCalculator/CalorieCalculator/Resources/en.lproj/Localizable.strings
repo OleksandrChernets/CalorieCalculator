@@ -12,4 +12,5 @@
 "Activity.high" = "High";
 "Alert.result" = "Your result";
 "Alert.showDetail" = "Show detail";
-
+"Detail.selected" = "Activity: %@ with %@ calories";
+"Detail.noSelected" = "No selected activity";

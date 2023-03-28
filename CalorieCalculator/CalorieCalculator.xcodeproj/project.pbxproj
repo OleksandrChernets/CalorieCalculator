@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5E7A6B7729D1E7620098282E /* R.Aliases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7A6B7629D1E7620098282E /* R.Aliases.swift */; };
 		5E7F723929C5072700D93F38 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 5E7F723829C5072700D93F38 /* Podfile */; };
 		5E7F723C29C85C7400D93F38 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7F723B29C85C7400D93F38 /* R.generated.swift */; };
 		5E7F724029C88BC800D93F38 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5E7F724229C88BC800D93F38 /* Localizable.strings */; };
@@ -24,6 +25,7 @@
 
 /* Begin PBXFileReference section */
 		1A76E7B3A78F6B381AAA5A88 /* Pods_CalorieCalculator.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CalorieCalculator.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5E7A6B7629D1E7620098282E /* R.Aliases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = R.Aliases.swift; sourceTree = "<group>"; };
 		5E7F723829C5072700D93F38 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		5E7F723B29C85C7400D93F38 /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = SOURCE_ROOT; };
 		5E7F723D29C88A0300D93F38 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/Main.strings; sourceTree = "<group>"; };
@@ -91,7 +93,7 @@
 				5EDA9D6829C4CA9100DF6575 /* Models */,
 				5EDA9D6C29C4CAC200DF6575 /* Controllers */,
 				5EDA9D6D29C4CBBA00DF6575 /* Views */,
-				5EDA9D6E29C4CBC600DF6575 /* DefaultFiles */,
+				5EDA9D6E29C4CBC600DF6575 /* Resources */,
 			);
 			path = CalorieCalculator;
 			sourceTree = "<group>";
@@ -111,7 +113,7 @@
 				5EDA9D5429C470B000DF6575 /* AppDelegate.swift */,
 				5EDA9D5629C470B000DF6575 /* SceneDelegate.swift */,
 				5E7F723B29C85C7400D93F38 /* R.generated.swift */,
-				5E7F724229C88BC800D93F38 /* Localizable.strings */,
+				5E7A6B7629D1E7620098282E /* R.Aliases.swift */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -133,14 +135,15 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		5EDA9D6E29C4CBC600DF6575 /* DefaultFiles */ = {
+		5EDA9D6E29C4CBC600DF6575 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				5E7F724229C88BC800D93F38 /* Localizable.strings */,
 				5EDA9D5D29C470B100DF6575 /* Assets.xcassets */,
 				5EDA9D5F29C470B100DF6575 /* LaunchScreen.storyboard */,
 				5EDA9D6229C470B100DF6575 /* Info.plist */,
 			);
-			path = DefaultFiles;
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		FDC0CC34C2655958A123E441 /* Frameworks */ = {
@@ -158,13 +161,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5EDA9D6529C470B100DF6575 /* Build configuration list for PBXNativeTarget "CalorieCalculator" */;
 			buildPhases = (
-				5E7F724429C8983800D93F38 /* ShellScript */,
 				1B2FCABEB3ABAE4D576EEDC9 /* [CP] Check Pods Manifest.lock */,
+				5E7F724429C8983800D93F38 /* ShellScript */,
 				5E7F723A29C85BEA00D93F38 /* ShellScript */,
 				5EDA9D4D29C470B000DF6575 /* Sources */,
 				5EDA9D4E29C470B000DF6575 /* Frameworks */,
 				5EDA9D4F29C470B000DF6575 /* Resources */,
-				DEACD1CE31E442C7D9F6045F /* [CP] Embed Pods Frameworks */,
+				BD3F98D5EC6C0E872FCA9383 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -284,7 +287,7 @@
 			shellPath = /bin/sh;
 			shellScript = "${PODS_ROOT}/SwiftLint/swiftlint\n";
 		};
-		DEACD1CE31E442C7D9F6045F /* [CP] Embed Pods Frameworks */ = {
+		BD3F98D5EC6C0E872FCA9383 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -312,6 +315,7 @@
 				5E7F723C29C85C7400D93F38 /* R.generated.swift in Sources */,
 				5EDA9D5929C470B000DF6575 /* HomeViewController.swift in Sources */,
 				5EDA9D6A29C4CAA900DF6575 /* TypeModels.swift in Sources */,
+				5E7A6B7729D1E7620098282E /* R.Aliases.swift in Sources */,
 				5EDA9D5529C470B000DF6575 /* AppDelegate.swift in Sources */,
 				5EDA9D5729C470B000DF6575 /* SceneDelegate.swift in Sources */,
 				5EDA9D7229C4CD4B00DF6575 /* ActivityListViewController.swift in Sources */,
@@ -475,7 +479,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = CalorieCalculator/DefaultFiles/Info.plist;
+				INFOPLIST_FILE = CalorieCalculator/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -503,7 +507,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = CalorieCalculator/DefaultFiles/Info.plist;
+				INFOPLIST_FILE = CalorieCalculator/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;

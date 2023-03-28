@@ -12,3 +12,5 @@
 "Activity.high" = "Висока";
 "Alert.result" = "Ваш результат";
 "Alert.showDetail" = "Подивитись деталі";
+"Detail.selected" = "Активність: %@ з %@ калорій";
+"Detail.noSelected" = "Не обрнана активінсть";
