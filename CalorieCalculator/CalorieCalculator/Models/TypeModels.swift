@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum Activity {
+enum Activity: CaseIterable {
     case none
     case low
     case medium
@@ -16,13 +16,13 @@ enum Activity {
     var title: String {
         switch self {
         case .none:
-            return R.string.localizable.activityNone()
+            return Localizable.activityNone()
         case .low:
-            return R.string.localizable.activityLow()
+            return Localizable.activityLow()
         case .medium:
-            return R.string.localizable.activityMedium()
+            return Localizable.activityMedium()
         case .high:
-            return R.string.localizable.activityHigh()
+            return Localizable.activityHigh()
         }
     }
     var value: Double {

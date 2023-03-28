@@ -32,14 +32,16 @@ final class HomeViewController: UIViewController {
     
     // MARK: Properties
     private let pickerView = UIPickerView()
-    private let activities = [Activity.none, Activity.low, Activity.medium, Activity.high]
-    
+    private let activities = Activity.allCases
+   
     // MARK: Lifecycle method
     override func viewDidLoad() {
         super.viewDidLoad()
         
         configureSegmentControl()
-        configureTextField()
+        configureWeightTextField()
+        configureHeightTextField()
+        configureAgeTextField()
         configureActivityField()
         localizeUI()
     }
@@ -86,9 +88,9 @@ final class HomeViewController: UIViewController {
     
     // MARK: Private methods
     private func showAlert(with title: String) {
-        let alert = UIAlertController(title: R.string.localizable.alertResult(), message: title, preferredStyle: .alert)
+        let alert = UIAlertController(title: Localizable.alertResult(), message: title, preferredStyle: .alert)
         alert.addAction(.init(title: "Ok", style: .cancel))
-        alert.addAction(.init(title: R.string.localizable.alertShowDetail(), style: .default) { _ in
+        alert.addAction(.init(title: Localizable.alertShowDetail(), style: .default) { _ in
             
             self.performSegue(withIdentifier: "segue", sender: self)
         })
@@ -103,27 +105,32 @@ final class HomeViewController: UIViewController {
         weightTextField.becomeFirstResponder()
         pickerView.selectRow(0, inComponent: 0, animated: true)
         activitySelectBy(row: 0)
-        
     }
     
     private func configureSegmentControl() {
         activitySegmentControl.removeAllSegments()
-        activitySegmentControl.insertSegment(withTitle: R.string.localizable.genderMale(), at: 0, animated: false)
-        activitySegmentControl.insertSegment(withTitle: R.string.localizable.genderFamele(), at: 1, animated: false)
+        activitySegmentControl.insertSegment(withTitle: Localizable.genderMale(), at: 0, animated: false)
+        activitySegmentControl.insertSegment(withTitle: Localizable.genderFamele(), at: 1, animated: false)
         activitySegmentControl.selectedSegmentIndex = 0
         activitySegmentControl.layer.cornerRadius = 15
     }
     
-    private func configureTextField() {
+    private func configureWeightTextField() {
         weightTextField.delegate = self
         weightTextField.keyboardType = .numberPad
         weightTextField.becomeFirstResponder()
+    }
+    
+    private func configureHeightTextField() {
         heightTextField.delegate = self
         heightTextField.keyboardType = .numberPad
+    }
+    
+    private func configureAgeTextField() {
         ageTextField.delegate = self
         ageTextField.keyboardType = .numberPad
     }
-    
+        
     private func configureActivityField() {
         pickerView.delegate = self
         pickerView.dataSource = self
@@ -136,24 +143,22 @@ final class HomeViewController: UIViewController {
     }
     
     private func localizeUI() {
-        weightLabel.text = R.string.localizable.calculatorWeightLabel()
-        heightLabel.text = R.string.localizable.calculatorHeightLabel()
-        ageLabel.text = R.string.localizable.calculatorAgeLabel()
-        activityLabel.text = R.string.localizable.calculatorActivityLabel()
-        calculateButton.setTitle(R.string.localizable.calculatorCalculateButton(), for: .normal)
-        clearButton.setTitle(R.string.localizable.calculatorClearButton(), for: .normal)
-        
+        weightLabel.text = Localizable.calculatorWeightLabel()
+        heightLabel.text = Localizable.calculatorHeightLabel()
+        ageLabel.text = Localizable.calculatorAgeLabel()
+        activityLabel.text = Localizable.calculatorActivityLabel()
+        calculateButton.setTitle(Localizable.calculatorCalculateButton(), for: .normal)
+        clearButton.setTitle(Localizable.calculatorClearButton(), for: .normal)
     }
 }
 
 // MARK: UITextFieldDelegate
 extension HomeViewController: UITextFieldDelegate {
+    
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        
         let allowedCharacters = CharacterSet.decimalDigits
         let characterSet = CharacterSet(charactersIn: string)
         return allowedCharacters.isSuperset(of: characterSet)
-        
     }
 }
 
@@ -165,17 +170,14 @@ extension HomeViewController: UIPickerViewDataSource, UIPickerViewDelegate {
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        
         return activities.count
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        
         return activities[row].title
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        
         activitySelectBy(row: row)
     }
 }
