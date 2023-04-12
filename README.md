@@ -26,4 +26,4 @@ Females = 8 * Weight(kg) + 5.25 * Height(cm) - 5 * age(y) + 5 - 161 + Exercises 
 <img src="https://i.imgur.com/dBaSKWF.gif" height="20" width="100%">
 
 <p align="left">
-<img width="200" alt="CineClips" src="https://kept.com.ua/image/Nqq/Снимок_экрана_2023-03-17_в_19.28.20.png">
+<img width="200" alt="CineClips" src="https://s2.gifyu.com/images/SNIMOK-EKRANA-2023-03-17-V-19.28.20.png">
